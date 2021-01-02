@@ -12,18 +12,19 @@ function Manager() {
 //Trivial Search Component
 function Search(props) {
   return (
-    <div>
-      <label htmlFor="query">Query: </label>
-      <input id="query" type="text" onChange={props.onSearch} />
+    <div className = "Search">
+      <input id="query" type="text" placeholder="Search" onChange={props.onSearch} />
     </div>
   );
 }
 
 //Trivial List Component --> Update me as the data structure changes, please.
+
+//TODO: Refactor the List into two components comprising the parent list and the items, for interactions and readability.
 const List = props => {
   return props.list.map(function (contact) {
     return (
-      <div key={contact.contactID}>
+      <div className = "List" key={contact.contactID}>
         <ul>
           <h4>{contact.Name}</h4>
           <li>Age: {contact.Age}</li>
@@ -36,9 +37,9 @@ const List = props => {
 
 const Drop = (props) => {
   return (
-    <select id="DropControl" onChange={props.onDrop}>
-      <option value="1">Colleagues</option>
-      <option value="2">Friends</option>
+    <select className = "Drop" id="DropControl" onChange={props.onDrop}>
+      <option value="1">Friends</option>
+      <option value="2">Colleagues</option>
       <option value="3">Family</option>
     </select>
   );
@@ -108,11 +109,11 @@ function App() {
     
     if (event.target.value == "1") {
       console.log(event.target.value)
-      setDropTerm(Colleagues);
+      setDropTerm(Friends);
     }
     else if (event.target.value == "2") {
       console.log("Selected Friends!")
-      setDropTerm(Friends);
+      setDropTerm(Colleagues);
     }
     else if (event.target.value == "3") {
       console.log("Selected Family!")
@@ -129,11 +130,14 @@ const searchedContacts = dropTerm.filter(contact =>
 //Primary App Structure
 return (
   <div className="App">
-    <h2>Welcome to NOTA</h2>
+    <div className = "StyleContainer">
+    <div className = "Header">
+    <h2 className = "Title">NOTA</h2>
     <Drop onDrop={dropUpdate} />
     <Search onSearch={queryUpdate} />
-    <hr></hr>
+    </div>
     <List list={searchedContacts} />
+  </div>
   </div>
 );
 }

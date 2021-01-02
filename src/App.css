@@ -1,8 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;500;700&display=swap');
+
 body {
-  background-color:#222222;
-  color:white;
+background-color: #222222;
+color:white;
+font-family:Comfortaa;
+}
+
+.StyleContainer {
+  display:flex;
+  flex-direction:column;
+  width:100%;
+}
+
+.Header {
+  display:flex;
+  align-items:center;
+  background-color:#313131;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-mosaic.png");
+  width:100%;
+  margin-bottom:25px;
+}
+
+.Title {
+  margin-right:auto;
+  padding-left:25px;
+  padding-right:25px;
+  padding-top:10px;
+  padding-bottom:05px;
+  margin-bottom:0px;
+  margin-top:0px;
+  background-color:#FD3A69;
+  font-weight:700;
+  height:100%;
+}
+
+.Drop {
+  margin-right:25px;
+}
+
+.Search {
+  margin-right:25px;
+}
+
+.List {
+  width:100%;
+  text-align:center;
 }
 
 ul {
   list-style-type: none;
+  padding-left:0;
 }
+
+li {
+  font-weight:300;
+  margin-bottom:7px;
+}
+
