@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 
-
 //Will be used to manage updates to entries later
 function Manager() {
   return (
@@ -9,10 +8,42 @@ function Manager() {
   );
 }
 
+//Modal Component for Expanded List Entries
+
+//TODO: 
+function Modal(props) {
+
+  const [toggle, setToggle] = React.useState(false);
+
+  const toggleSet = () => {
+    setToggle(!toggle)
+  }
+
+  if (toggle == true) {
+    return (
+      <div>
+        <button onClick={toggleSet}>Toggle</button>
+        <div className="ExtendedView">
+          <p>Age: {props.data.Age}</p>
+          <p>Favorite Food: {props.data.FavFood}</p>
+        </div>
+      </div>
+    )
+  }
+  else {
+    return (
+      <button onClick={toggleSet}>Toggle</button>
+    )
+  }
+};
+
 //Trivial Search Component
+
+//TODO: Modal Will Require Revision. Entries in relative position remain open if the active list is switched. 
+//TODO: Place button next to title and style modal so that it fills the space below the line they occupy on screen.
 function Search(props) {
   return (
-    <div className = "Search">
+    <div className="Search">
       <input id="query" type="text" placeholder="Search" onChange={props.onSearch} />
     </div>
   );
@@ -20,16 +51,14 @@ function Search(props) {
 
 //Trivial List Component --> Update me as the data structure changes, please.
 
-//TODO: Refactor the List into two components comprising the parent list and the items, for interactions and readability.
 const List = props => {
   return props.list.map(function (contact) {
     return (
-      <div className = "List" key={contact.contactID}>
-        <ul>
+      <div className="List" key={contact.contactID}>
+        <div>
           <h4>{contact.Name}</h4>
-          <li>Age: {contact.Age}</li>
-          <li>Favorite Food: {contact.FavFood}</li>
-        </ul>
+          <Modal data={contact}></Modal>
+        </div>
       </div>
     );
   })
@@ -37,7 +66,7 @@ const List = props => {
 
 const Drop = (props) => {
   return (
-    <select className = "Drop" id="DropControl" onChange={props.onDrop}>
+    <select className="Drop" id="DropControl" onChange={props.onDrop}>
       <option value="1">Friends</option>
       <option value="2">Colleagues</option>
       <option value="3">Family</option>
@@ -47,7 +76,7 @@ const Drop = (props) => {
 
 function App() {
 
-  //To be populated with server and database later
+  //Category Arrays, To Replace with Server Logic Later
   const Friends = [
     {
       Name: 'James Dulaney',
@@ -66,7 +95,6 @@ function App() {
     },
 
   ];
-
   const Colleagues = [
     {
       Name: 'Tom Dulaney',
@@ -85,7 +113,6 @@ function App() {
     },
 
   ];
-
   const Family = [
     {
       Name: 'Samuel Pucker',
@@ -96,17 +123,20 @@ function App() {
 
   let category = Friends;
 
-  //Search State & Dropdown State Management, Needs Revision
+  //State Management, Needs Revision
+
+  // - - - Query Management
   const [queryTerm, setQueryTerm] = React.useState('');
 
   const queryUpdate = event => {
     setQueryTerm(event.target.value);
   };
 
+  // - - - DropDown Management
   const [dropTerm, setDropTerm] = React.useState(Friends);
 
   const dropUpdate = (event) => {
-    
+
     if (event.target.value == "1") {
       console.log(event.target.value)
       setDropTerm(Friends);
@@ -122,24 +152,24 @@ function App() {
     return;
   };
 
-//Search Contact Filtering
-const searchedContacts = dropTerm.filter(contact =>
-  contact.Name.toLowerCase().includes(queryTerm.toLowerCase())
-);
+  //Search Contact Filtering
+  const searchedContacts = dropTerm.filter(contact =>
+    contact.Name.toLowerCase().includes(queryTerm.toLowerCase())
+  );
 
-//Primary App Structure
-return (
-  <div className="App">
-    <div className = "StyleContainer">
-    <div className = "Header">
-    <h2 className = "Title">NOTA</h2>
-    <Drop onDrop={dropUpdate} />
-    <Search onSearch={queryUpdate} />
+  //Primary App Structure
+  return (
+    <div className="App">
+      <div className="StyleContainer">
+        <div className="Header">
+          <h2 className="Title">nøta</h2>
+          <Drop onDrop={dropUpdate} />
+          <Search onSearch={queryUpdate} />
+        </div>
+        <List list={searchedContacts} />
+      </div>
     </div>
-    <List list={searchedContacts} />
-  </div>
-  </div>
-);
+  );
 }
 
 export default App;
