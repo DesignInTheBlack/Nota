@@ -22,7 +22,10 @@ function Modal(props) {
   if (toggle == true) {
     return (
       <div>
-        <button onClick={toggleSet}>Toggle</button>
+        <div className = "LimitedView">
+        <h5 className = "EntryTitleOpen">{props.data.Name}</h5>
+        <button className = "Toggle" onClick={toggleSet}>▲</button>
+        </div>
         <div className="ExtendedView">
           <p>Age: {props.data.Age}</p>
           <p>Favorite Food: {props.data.FavFood}</p>
@@ -32,7 +35,10 @@ function Modal(props) {
   }
   else {
     return (
-      <button onClick={toggleSet}>Toggle</button>
+      <div className = "LimitedView">
+      <h5 className = "EntryTitle">{props.data.Name}</h5>
+      <button className = "Toggle" onClick={toggleSet}>▼</button>
+      </div>
     )
   }
 };
@@ -40,11 +46,10 @@ function Modal(props) {
 //Trivial Search Component
 
 //TODO: Modal Will Require Revision. Entries in relative position remain open if the active list is switched. 
-//TODO: Place button next to title and style modal so that it fills the space below the line they occupy on screen.
 function Search(props) {
   return (
-    <div className="Search">
-      <input id="query" type="text" placeholder="Search" onChange={props.onSearch} />
+    <div>
+      <input className="Search" type="text" placeholder="Search..." onChange={props.onSearch} />
     </div>
   );
 }
@@ -56,7 +61,6 @@ const List = props => {
     return (
       <div className="List" key={contact.contactID}>
         <div>
-          <h4>{contact.Name}</h4>
           <Modal data={contact}></Modal>
         </div>
       </div>

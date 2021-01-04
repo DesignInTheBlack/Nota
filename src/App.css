@@ -36,16 +36,22 @@ font-family:Comfortaa;
 }
 
 .Drop {
-  margin-right:25px;
+  margin-right:15px;
+  background-color:#222222;
+  color:white;
+  border:none;
 }
 
 .Search {
   margin-right:25px;
+  background-color:#222222;
+  color:white;
+  border:none;
 }
 
 .List {
-  width:100%;
-  text-align:center;
+display:flex;
+flex-direction:column;
 }
 
 ul {
@@ -59,9 +65,39 @@ li {
 }
 
 .ExtendedView {
-  background-color:#111111;
+  background-color:white;
   padding-top:10px;
   padding-bottom:10px;
   margin-top:5px;
+  color:#111111;
 }
+
+.LimitedView {
+  display:flex;
+}
+
+.EntryTitle {
+  margin-left:25px;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.EntryTitleOpen {
+  margin-left:35px;
+  margin-top:15px;
+  margin-bottom:15px;
+}
+
+.Toggle {
+  margin-left:auto;
+  margin-right:25px;
+  background-color:#FD3A69;
+  border:none;
+  color:white;
+  height:25px;
+  width:25px;
+  align-self:center;
+}
+
+.List:nth-child(even) {background-color: #333333;}
 
